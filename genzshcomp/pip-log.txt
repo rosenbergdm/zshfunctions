@@ -1,0 +1,23 @@
+Downloading/unpacking select
+  Getting page http://pypi.python.org/simple/select
+  Could not fetch URL http://pypi.python.org/simple/select: HTTP Error 404: Not Found
+  Will skip URL http://pypi.python.org/simple/select when looking for download links for select
+  Getting page http://pypi.python.org/simple/
+  URLs to search for versions for select:
+  * http://pypi.python.org/simple/select/
+  Getting page http://pypi.python.org/simple/select/
+  Could not fetch URL http://pypi.python.org/simple/select/: HTTP Error 404: Not Found
+  Will skip URL http://pypi.python.org/simple/select/ when looking for download links for select
+  Could not find any downloads that satisfy the requirement select
+No distributions at all found for select
+Exception information:
+Traceback (most recent call last):
+  File "/Library/Python/2.6/site-packages/pip-0.6.3-py2.6.egg/pip/basecommand.py", line 115, in main
+    self.run(options, args)
+  File "/Library/Python/2.6/site-packages/pip-0.6.3-py2.6.egg/pip/commands/install.py", line 155, in run
+    requirement_set.install_files(finder, force_root_egg_info=self.bundle, bundle=self.bundle)
+  File "/Library/Python/2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 823, in install_files
+    url = finder.find_requirement(req_to_install, upgrade=self.upgrade)
+  File "/Library/Python/2.6/site-packages/pip-0.6.3-py2.6.egg/pip/index.py", line 117, in find_requirement
+    raise DistributionNotFound('No distributions at all found for %s' % req)
+DistributionNotFound: No distributions at all found for select

@@ -1,0 +1,8 @@
+#compdef test2 
+
+_arguments \ 
+    -a \ 
+    -c \ 
+    -d \ 
+    ':arg:(x2 y2)'
+

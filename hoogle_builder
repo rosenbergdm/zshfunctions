@@ -1,0 +1,55 @@
+#autoload
+# encoding=UTF-8
+
+#===============================================================================
+#
+#         FILE:  hoogle_builder.zsh
+#
+#        USAGE:  ---
+#
+#  DESCRIPTION:  ---
+#
+#      OPTIONS:  ---
+# REQUIREMENTS:  ---
+#         BUGS:  ---
+#        NOTES:  ---
+#       AUTHOR:  David M. Rosenberg <rosenbergdm@uchicago.edu>
+#      COMPANY:  University of Chicago
+#      VERSION:  1.0
+#      CREATED:  05/29/10
+#     REVISION:  ---
+#===============================================================================
+
+
+local CABALDIR PKGLIST HOODIR
+
+HOODIR="/usr/doc/hoogle"
+CABALDIR="$HOME/.cabal/packages/hackage.haskell.org"
+numLn=$(ghc-pkg list --global | wc -l | awk '{print $1}')
+PKGLIST=$(ghc-pkg list --global | tail -n $((numLn-1)) | awk '{print $1}')
+
+for pkg in ${PKGLIST}; do
+    pprint action "Processing package ${pkg}...";
+    pkgName=$(echo $pkg | awk -F "-" '{print $1}')
+    pkgVer=$(echo $pkg | awk -F "-" '{print $2}')
+
+    if [[ -a "${HOODIR}/${pkgName}.hoo" ]]; then
+        pprint say "Skipping ${pkg} since it is already present in ${HOODIR}."
+        continue;
+    fi;
+
+    cd "${CABALDIR}/${pkgName}/${pkgVer}";
+    tar -xvf "${pkg}.tar.gz"
+    cd ${pkg}
+    cabal configure
+    cabal build
+    cabal hscolour
+    cabal haddock --hoogle
+    txtdb=$(find . -name "${pkgName}.txt" -exec cp {} . \;)
+    hoogle --convert="${pkgName}.txt" -o "${pkgName}.hoo"
+    cp "${pkgName}.hoo" "${HOODIR}/"
+    cd ../
+    rm -Rf ${pkg}
+    pprint status "Processing of package ${pkg} complete."
+done
+

@@ -1,0 +1,3 @@
+[console_scripts]
+genzshcomp = genzshcomp:main
+

@@ -1,0 +1,6 @@
+#compdef myvals
+
+_values -s , 'description' \
+    'David[First]' \
+    '*Michael[Last]'
+

@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+Makefile
+README
+genzshcomp.py
+setup.py
+genzshcomp.egg-info/PKG-INFO
+genzshcomp.egg-info/SOURCES.txt
+genzshcomp.egg-info/dependency_links.txt
+genzshcomp.egg-info/entry_points.txt
+genzshcomp.egg-info/not-zip-safe
+genzshcomp.egg-info/top_level.txt
+test/test_genzshcomp.py

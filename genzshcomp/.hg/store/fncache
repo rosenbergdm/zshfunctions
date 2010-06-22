@@ -1,0 +1,10 @@
+data/.hgtags.i
+data/LICENSE.i
+data/MANIFEST.in.i
+data/Makefile.i
+data/README.i
+data/example/argparse_grin.py.i
+data/example/optparse_pyprof2html.py.i
+data/genzshcomp.py.i
+data/setup.py.i
+data/test/test_genzshcomp.py.i

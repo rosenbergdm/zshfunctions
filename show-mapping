@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+parseMappings() {
+    typeset -A _keymapping
+    bindkey | 
+        while IFS="\n" read -r inputline; do 
+            keysequence=$(print "${(q)inputline}" | perl -pi -e 's/^(".*") (.*$)/$1/')
+            commandwidget=$(print "${(q)inputline}" | perl -pi -e 's/^(".*") (.*$)/$2/')
+            _keymapping+=("${(q)commandwidget}" "${(q)keysequence}")
+        done
+    print "${(qkv)_keymapping[@]}"
+}
+
+lookupWidget() {}
+
+
+
+
+    
+
+
+    
