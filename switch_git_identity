@@ -1,0 +1,32 @@
+# autoload
+# switch_git_identity
+
+#local identities, args
+
+typeset -A _identities
+_identities["connamara"]="David M. Rosenberg:drosenberg@connamara.com:id_rsa.pub.connamara"
+_identities["personal"]="David M. Rosenberg:dmr@davidrosenberg.me:id_rsa.pub.personal"
+
+function _usage() {
+  print "USAGE: switch_git_identity [personal|connamara]\n\n"
+}
+
+if [[ "$@" == 'connamara' ]]; then
+    git config --global user.name "$(echo $_identities["connamara"] | awk -F ":" '{print $1}')"
+    git config --global user.email "$(echo $_identities["connamara"] | awk -F ":" '{print $2}')"
+    rm ~/.ssh/id_rs{a,a.pub}
+    ln -s ~/.ssh/id_rsa.pub.connamara ~/.ssh/id_rsa.pub
+    ln -s ~/.ssh/id_rsa.connamara ~/.ssh/id_rsa
+elif [[ "$@" == 'personal' ]]; then
+    git config --global user.name "$(echo $_identities["personal"] | awk -F ":" '{print $1}')"
+    git config --global user.email "$(echo $_identities["personal"] | awk -F ":" '{print $2}')"
+    rm ~/.ssh/id_rs{a,a.pub}
+    ln -s ~/.ssh/id_rsa.pub.personal ~/.ssh/id_rsa.pub
+    ln -s ~/.ssh/id_rsa.personal ~/.ssh/id_rsa
+else
+    _usage
+    return 1
+fi
+
+return 0
+
